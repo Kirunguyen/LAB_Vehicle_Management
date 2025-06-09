@@ -1,4 +1,4 @@
-package lab_vehicle_management;
+package Model;
 
 public class Vehicle {
 
@@ -22,7 +22,7 @@ public class Vehicle {
         this.type = type;
         this.productYear = productYear;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -81,8 +81,8 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return String.format("%s | %s | %s | %.2f | %s | %s | %d", 
-            id, name, color, price, brand, type, productYear);
+        return String.format("| %-8s | %-15s | %-10s | $%-10.2f | %-10s | %-10s | %-4d |",
+                             id, name, color, price, brand, type, productYear);
     }
 
 }

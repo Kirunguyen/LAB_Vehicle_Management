@@ -1,5 +1,5 @@
-package lab_vehicle_management;
+package Controller;
 
-public class VehicleManager {
+public class VehicleController {
     
 }
