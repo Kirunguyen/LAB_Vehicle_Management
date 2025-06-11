@@ -5,9 +5,14 @@ import java.util.Scanner;
 import Model.Vehicle;
 
 public class VehicleView {
+
     private Scanner scanner = new Scanner(System.in);
 
-    public void showMenu() {
+    public static void main(String[] args) {
+        showMenu();
+    }
+
+    public static void showMenu() {
         System.out.println("\n===== VEHICLE MANAGEMENT SYSTEM =====");
         System.out.println("1. Add new vehicle");
         System.out.println("2. Check if vehicle exists");
@@ -20,33 +25,17 @@ public class VehicleView {
         System.out.println("0. Exit");
         System.out.print("Enter your choice: ");
     }
-
-    public Vehicle getVehicleInput() {
-        System.out.println("\n---Input Vehicle Details---");
-        System.out.print("Input ID: ");
-        String id = scanner.nextLine();
-        
-        System.out.print("Input Name: ");
-        String name = scanner.nextLine();
-        
-        System.out.print("Input Color: ");
-        String color = scanner.nextLine();
-        
-        System.out.print("Input Price: ");
-        double price     = Double.parseDouble(scanner.nextLine());
-        
-        System.out.print("Input Brand: ");
-        String brand = scanner.nextLine();
-        
-        System.out.print("Input Type: ");
-        String type = scanner.nextLine();
-        
-        System.out.print("Input Production Year: ");
-        int year = Integer.parseInt(scanner.nextLine());
-
-        return new Vehicle(id, name, color, price, brand, type, year);
+    
+    public int getMenuChoice() {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Please enter a number!");
+            scanner.next();
+        }
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        return choice;
     }
-
+    
     public void displayVehicleList(List<Vehicle> vehicles) {
         System.out.println("\n=== VEHICLE LIST ===");
         System.out.println("-----------------------------------------------------------------------------");
@@ -58,24 +47,5 @@ public class VehicleView {
         }
         
         System.out.println("-----------------------------------------------------------------------------");
-    }
-
-    public String getSearchId() {
-        System.out.print("\nEnter Vehicle ID to search: ");
-        return scanner.nextLine();
-    }
-
-    public void showMessage(String message) {
-        System.out.println(message);
-    }
-
-    public int getMenuChoice() {
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a number!");
-            scanner.next();
-        }
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-        return choice;
     }
 }
