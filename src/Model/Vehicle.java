@@ -30,6 +30,9 @@ public class Vehicle implements Serializable{
     }
 
     public void setId(String id) {
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("ID cannot be empty");
+        }
         this.id = id;
     }
 
@@ -38,6 +41,9 @@ public class Vehicle implements Serializable{
     }
 
     public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
         this.name = name;
     }
 
@@ -46,6 +52,9 @@ public class Vehicle implements Serializable{
     }
 
     public void setColor(String color) {
+        if (color == null || color.trim().isEmpty()) {
+            throw new IllegalArgumentException("Color cannot be empty");
+        }
         this.color = color;
     }
 
@@ -63,6 +72,9 @@ public class Vehicle implements Serializable{
     }
 
     public void setBrand(String brand) {
+        if (brand == null || brand.trim().isEmpty()) {
+            throw new IllegalArgumentException("Brand cannot be empty");
+        }
         this.brand = brand;
     }
 
@@ -71,6 +83,9 @@ public class Vehicle implements Serializable{
     }
 
     public void setType(String type) {
+        if (type == null || type.trim().isEmpty()) {
+            throw new IllegalArgumentException("Type cannot be empty");
+        }
         this.type = type;
     }
 
@@ -79,6 +94,9 @@ public class Vehicle implements Serializable{
     }
 
     public void setProductYear(int productYear) {
+        if (productYear < 1900 || productYear > java.time.Year.now().getValue()) {
+            throw new IllegalArgumentException("Invalid production year");
+        }
         this.productYear = productYear;
     }
 
