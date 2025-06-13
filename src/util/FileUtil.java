@@ -21,7 +21,7 @@ public class FileUtil {
     }
 
     //save vehicle to file
-    public static void saveVehicles(List<Vehicle> vehicles) {
+    public static void saveVehicle(List<Vehicle> vehicles) {
         try {
             createDataDirectory();
             try (ObjectOutputStream oos = new ObjectOutputStream( //adds serialization
