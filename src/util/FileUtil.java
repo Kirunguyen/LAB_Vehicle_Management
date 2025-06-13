@@ -34,7 +34,7 @@ public class FileUtil {
     }
 
     //read vehicles from file
-    public static List<Vehicle> loadVehicle() {
+    public static List<Vehicle> loadVehicles() {
         try {
             createDataDirectory();
             File file = new File(FILE_PATH);
