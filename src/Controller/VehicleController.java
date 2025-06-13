@@ -2,7 +2,6 @@ package Controller;
 
 import java.util.Scanner;
 import Model.Vehicle;
-import java.util.List;
 
 public class VehicleController {
     Scanner scanner = new Scanner(System.in);
@@ -43,13 +42,4 @@ public class VehicleController {
         System.out.println(message);
     }
 
-    public int getMenuChoice() {
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a number!");
-            scanner.next();
-        }
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-        return choice;
-    }
 }
