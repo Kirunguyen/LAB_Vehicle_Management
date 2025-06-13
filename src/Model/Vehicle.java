@@ -54,6 +54,7 @@ public class Vehicle implements Serializable{
     }
 
     public void setPrice(double price) {
+        if (price <= 0) throw new IllegalArgumentException("Price must be > 0");
         this.price = price;
     }
 
