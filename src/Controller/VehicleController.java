@@ -3,14 +3,6 @@
  *
  * TODO: InputID in View
  *
- * Update vehicle (50 LOC)
- *
- * Delete vehicle (50 LOC)
- *
- * Search vehicle (with sub-functions)
- * * By name (50 LOC)
- * * By ID (50 LOC)
- *
  * Display vehicle list (with sub-functions)
  * * Show all (50 LOC)
  * * Show all descending by price (50 LOC)
@@ -25,7 +17,9 @@ package Controller;
 
 import java.util.Scanner;
 import Model.Vehicle;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import util.FileUtil;
 import util.ControlUtil;
@@ -38,7 +32,7 @@ public class VehicleController {
     /**
      * Check if vehicle exists
      *
-     * @param String id
+     * @param id ID of vehicle
      *
      * @return Boolean
      */
@@ -48,15 +42,15 @@ public class VehicleController {
     }
 
     /**
-     * Add new vehicle (50 LOC)
+     * Add new vehicle
      *
-     * @param String id
+     * @param id ID of vehicle
      *
      * @return Boolean (success/failed)
      */
     public boolean addVehicle(String id) {
         if (doesVehicleExist(id)) {
-            System.out.println("Error: Vehicle ID already exists");
+            System.out.println("Cannot add - Vehicle ID already exists");
             return false;
         }
 
@@ -67,15 +61,15 @@ public class VehicleController {
     }
 
     /**
-     * Delete vehicle (50 LOC)
+     * Delete vehicle
      *
-     * @param id
+     * @param id ID of vehicle
      *
      * @return Boolean (success/failed)
      */
     public boolean deleteVehicle(String id) {
         if (!doesVehicleExist(id)) {
-            System.out.println("Error: Vehicle ID does not exist");
+            System.out.println("Cannot remove - Vehicle ID does not exist");
             return false;
         }
 
@@ -84,19 +78,62 @@ public class VehicleController {
     }
 
     /**
-     * TODO: UPDATE = DELETE -> ADD
+     * Update vehicle = Delete -> Add (Will change order)
      *
-     * @param String id
+     * @param id ID of vehicle
      *
      * @return Boolean (success/failed)
      */
     public boolean updateVehicle(String id) {
         if (!doesVehicleExist(id)) {
-            System.out.println("Error: Vehicle ID does not exist");
+            System.out.println("Cannot update - Vehicle ID does not exist");
             return false;
         }
-        //???
-        return true;
+        if (deleteVehicle(id)) {
+            addVehicle(id);
+            return true;
+        }
+
+        return false;
     }
 
+    /**
+     * Searches vehicle by ID
+     *
+     * @param id ID to search (unique)
+     *
+     * @return Vehicle if found, null otherwise
+     */
+    public Vehicle searchById(String id) {
+        if (id == null || id.trim().isEmpty()) {
+            System.out.println("Error: ID cannot be empty");
+            return null;
+        }
+        Vehicle found = vehicles.stream()
+                .filter(v -> v.getId().equalsIgnoreCase(id))
+                .findFirst()
+                .orElse(null);
+
+        return found;
+    }
+
+    /**
+     * Searches vehicles by name (partial match)
+     *
+     * @param name Name or partial name to search
+     * 
+     * @return List<Vehicle> 
+     */
+    public List<Vehicle> searchByName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Error: Name cannot be empty");
+            return Collections.emptyList();
+        }
+
+        String searchTerm = name.trim().toLowerCase();
+        return vehicles.stream()
+                .filter(v -> v.getName().toLowerCase().contains(searchTerm))
+                .collect(Collectors.toList());
+
+    }
 }
