@@ -106,7 +106,7 @@ public class ViewUtil {
                 return input;
             }
 
-            System.out.println("Error: ID cannot be empty. Please try again.");
+            System.out.println("Error: Name cannot be empty. Please try again.");
         }
     }
 

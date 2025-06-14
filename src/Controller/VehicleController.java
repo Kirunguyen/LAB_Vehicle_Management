@@ -1,18 +1,3 @@
-/**
- * Main Functions:
- *
- * TODO: InputID in View
- *
- * Display vehicle list (with sub-functions)
- * * Show all (50 LOC)
- * * Show all descending by price (50 LOC)
- *
- * Save data to file (50 LOC) (in FileUtil)
- *
- * Print vehicle list (with sub-functions)
- * * Print all (50 LOC)
- * * Print all descending by price (50 LOC)
- */
 package Controller;
 
 import java.util.Scanner;
@@ -121,8 +106,8 @@ public class VehicleController {
      * Searches vehicles by name (partial match)
      *
      * @param name Name or partial name to search
-     * 
-     * @return List<Vehicle> 
+     *
+     * @return List<Vehicle>
      */
     public List<Vehicle> searchByName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -136,4 +121,26 @@ public class VehicleController {
                 .collect(Collectors.toList());
 
     }
+    /**
+     * Print vehicle list - All
+     * @param none
+     *
+     * @return vehicles
+     */
+    public List<Vehicle> getAllVehicles() {
+        return vehicles;
+    }
+
+    /**
+     * Print vehicle list - All - Desc. by price
+     * @param none
+     *
+     * @return vehicles
+     */
+    public List<Vehicle> getAllVehiclesSortedByPrice() {
+        List<Vehicle> sorted = new java.util.ArrayList<>(vehicles);
+        sorted.sort((v1, v2) -> Double.compare(v2.getPrice(), v1.getPrice()));
+        return sorted;
+    }
+    
 }
